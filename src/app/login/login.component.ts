@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   formErrors: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private auth: AuthenticationService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required ],
       password: ['', Validators.required ],
@@ -24,11 +29,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const formValue = this.loginForm.value;
 
-    if (formValue.email === 'valid@example.com'
-      && formValue.password === 'ValidPassword123!') {
-       this.router.navigate(['/dashboard']);
-    } else {
-      this.formErrors = 'Invalid email/password combination';
-    }
+    this.auth.authenticateUser(formValue.email, formValue.password).subscribe(
+      result => this.router.navigate(['/dashboard']),
+      error => this.formErrors = error
+    )
   }
 }
