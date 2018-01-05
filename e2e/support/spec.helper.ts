@@ -6,6 +6,7 @@ export class SpecHelper {
   }
 
   getCurrentUrl() {
-    return browser.getCurrentUrl();
+    return browser.getCurrentUrl()
+      .then(url => `/${url.split('/').slice(3).join('/')}`)
   }
 }

@@ -1,9 +1,11 @@
 import { SpecHelper } from './support/spec.helper';
 import { LoginPage } from './pages/login.po';
+import { DashboardPage } from './pages/dashboard.po';
 
-xdescribe('logging in', () => {
+describe('logging in', () => {
   let specHelper: SpecHelper;
   let loginPage: LoginPage;
+  let dashboardPage: DashboardPage;
 
   let email: string;
   let password: string;
@@ -11,6 +13,7 @@ xdescribe('logging in', () => {
   beforeEach(() => {
     specHelper = new SpecHelper();
     loginPage = new LoginPage();
+    dashboardPage = new DashboardPage();
   });
 
   describe('valid credentials', () => {
@@ -24,6 +27,10 @@ xdescribe('logging in', () => {
 
       loginPage.emailInput.sendKeys(email);
       loginPage.passwordInput.sendKeys(password);
+
+      loginPage.loginButton.click();
+
+      expect(dashboardPage.header.getText()).toEqual('Dashboard');
 
       expect(specHelper.getCurrentUrl()).toEqual('/dashboard');
     });
@@ -40,6 +47,8 @@ xdescribe('logging in', () => {
 
       loginPage.emailInput.sendKeys(email);
       loginPage.passwordInput.sendKeys(password);
+
+      loginPage.loginButton.click();
 
       expect(loginPage.errorMessages.getText()).toEqual('Invalid email/password combination');
     });

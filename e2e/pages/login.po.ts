@@ -5,10 +5,10 @@ export class LoginPage {
 
   header = $('h1');
 
-  emailInput = $('.email-input');
-  passwordInput = $('.password-input');
+  emailInput = $('#input-email');
+  passwordInput = $('#input-password');
 
-  errorMessages = $('.alert .error-messages');
+  errorMessages = $('.alert.error-messages');
 
   loginButton = $('.login-button');
 }
