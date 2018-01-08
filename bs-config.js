@@ -14,6 +14,7 @@ module.exports = {
   open: false,
   notify: false,
   minify: false,
+  ui: false,
   files: [
     "./dist/**/*.{html,htm,css,js}"
   ],

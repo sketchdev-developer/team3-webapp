@@ -31,7 +31,10 @@ export class LoginComponent implements OnInit {
 
     this.auth.authenticateUser(formValue.email, formValue.password).subscribe(
       result => this.router.navigate(['/dashboard']),
-      error => this.formErrors = error
+      errorResponse => {
+        console.log('error!!!', errorResponse.error.errors);
+        this.formErrors = errorResponse.error.errors;
+      }
     )
   }
 }
