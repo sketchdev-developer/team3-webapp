@@ -14,8 +14,7 @@ dependencies:
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10-browsers
-      - image: selenium/standalone-chrome:3.8.1
+      - image: circleci/node:8.9.4-browsers
 
     working_directory: ~/repo
 
