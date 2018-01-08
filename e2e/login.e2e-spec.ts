@@ -20,6 +20,21 @@ describe('logging in', () => {
     beforeEach(() => {
       email = 'valid@example.com';
       password = 'ValidPassword123!';
+
+      specHelper.stubApiRequest({
+        url: '/sessions',
+        method: 'GET',
+        response: {
+          code: 201,
+          data: {
+            token: 'something',
+            user: {
+              id: 100,
+              email: email,
+            }
+          }
+        }
+      });
     });
 
     it('redirects to protected page', () => {
