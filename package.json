@@ -8,7 +8,8 @@
     "build:test": "ng build --env=test --target=production --aot --progress=false",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e -s false"
+    "e2e": "ng e2e -s false",
+    "ci:e2e": "ng e2e --progress=false"
   },
   "private": true,
   "dependencies": {
