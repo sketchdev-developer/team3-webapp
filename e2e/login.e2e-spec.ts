@@ -23,7 +23,7 @@ describe('logging in', () => {
 
       specHelper.stubApiRequest({
         url: '/sessions',
-        method: 'GET',
+        method: 'POST',
         response: {
           code: 201,
           data: {
@@ -55,6 +55,17 @@ describe('logging in', () => {
     beforeEach(() => {
       email = 'invalid@example.com';
       password = 'wrongPassword!';
+
+      specHelper.stubApiRequest({
+        url: '/sessions',
+        method: 'POST',
+        response: {
+          code: 422,
+          data: {
+            errors: 'Invalid email/password combination'
+          }
+        }
+      });
     });
 
     it('shows error on login page', () => {

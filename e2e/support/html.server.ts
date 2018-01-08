@@ -92,25 +92,66 @@ export class HtmlServer {
   }
 }
 
-export class ApiServer {
-  respondToApiRequest(req, res, next) {
-    const body = req.body;
+type HTTP_METHODS = 'GET' | 'PUT' | 'POST' | 'DELETE' | 'OPTIONS' | 'HEAD';
 
-    if (body.email === 'valid@example.com' && body.password === 'ValidPassword123!') {
-      res.json({ status: true });
+interface IStubRestRequestResponse {
+  code: number;
+  data: any;
+}
+
+interface IStubRestRequestOptions {
+  url: string;
+  method: HTTP_METHODS;
+  response: IStubRestRequestResponse;
+}
+
+export class StubRestRequest {
+  url: string;
+  method: HTTP_METHODS;
+  response: any;
+
+  constructor(private options: IStubRestRequestOptions) {
+    this.url = options.url;
+    this.method = options.method;
+    this.response = options.response;
+  }
+}
+
+export class ApiServer {
+  static stubbedRequests: StubRestRequest[] = [];
+
+  static stubApiRequest(options: IStubRestRequestOptions) {
+    const request = new StubRestRequest(options);
+    ApiServer.stubbedRequests.push(request);
+    return request;
+  }
+
+  static resetRequests(newRequests: StubRestRequest[] = []) {
+    ApiServer.stubbedRequests = newRequests;
+  }
+
+  static respondToApiRequest(req, res, next) {
+    let foundRequest;
+
+    for (let stubbedRequest of ApiServer.stubbedRequests) {
+      if (req.method === stubbedRequest.method && req.path === stubbedRequest.url) {
+        foundRequest = stubbedRequest;
+      }
+    }
+
+    if (foundRequest) {
+      res.status(foundRequest.response.code).json(foundRequest.response.data);
     } else {
-      res.status(422).json({ errors: 'Invalid email/password combination' });
+      console.error('didnt find request!', req.method, req.path);
     }
   }
 }
 
 const app = express();
 
-const apiServer = new ApiServer();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.all('*', apiServer.respondToApiRequest);
+app.all('*', ApiServer.respondToApiRequest);
 app.listen(API_SERVER_PORT);
 
 console.log('Started Http Proxy Server');
