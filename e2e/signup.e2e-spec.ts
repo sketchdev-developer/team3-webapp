@@ -1,10 +1,10 @@
 import { SpecHelper } from './support/spec.helper';
-import { LoginPage } from './pages/login.po';
+import { SignupPage } from './pages/signup.po';
 import { DashboardPage } from './pages/dashboard.po';
 
-describe('logging in', () => {
+describe('signing up', () => {
   let specHelper: SpecHelper;
-  let loginPage: LoginPage;
+  let signupPage: SignupPage;
   let dashboardPage: DashboardPage;
 
   let email: string;
@@ -12,7 +12,7 @@ describe('logging in', () => {
 
   beforeEach(() => {
     specHelper = new SpecHelper();
-    loginPage = new LoginPage();
+    signupPage = new SignupPage();
     dashboardPage = new DashboardPage();
   });
 
@@ -22,7 +22,7 @@ describe('logging in', () => {
       password = 'ValidPassword123!';
 
       specHelper.stubApiRequest({
-        url: '/sessions',
+        url: '/users',
         method: 'POST',
         response: {
           code: 201,
@@ -38,12 +38,12 @@ describe('logging in', () => {
     });
 
     it('redirects to protected page', () => {
-      specHelper.navigateTo(loginPage);
+      specHelper.navigateTo(signupPage);
 
-      loginPage.emailInput.sendKeys(email);
-      loginPage.passwordInput.sendKeys(password);
+      signupPage.emailInput.sendKeys(email);
+      signupPage.passwordInput.sendKeys(password);
 
-      loginPage.loginButton.click();
+      signupPage.signupButton.click();
 
       expect(dashboardPage.header.getText()).toEqual('Dashboard');
 
@@ -53,30 +53,30 @@ describe('logging in', () => {
 
   describe('invalid credentials', () => {
     beforeEach(() => {
-      email = 'invalid@example.com';
-      password = 'wrongPassword!';
+      email = 'existing_user@example.com';
+      password = 'somePassword!';
 
       specHelper.stubApiRequest({
-        url: '/sessions',
+        url: '/users',
         method: 'POST',
         response: {
           code: 422,
           data: {
-            errors: 'Invalid email/password combination'
+            errors: 'Email already in use'
           }
         }
       });
     });
 
-    it('shows error on login page', () => {
-      specHelper.navigateTo(loginPage);
+    it('shows error on signup page', () => {
+      specHelper.navigateTo(signupPage);
 
-      loginPage.emailInput.sendKeys(email);
-      loginPage.passwordInput.sendKeys(password);
+      signupPage.emailInput.sendKeys(email);
+      signupPage.passwordInput.sendKeys(password);
 
-      loginPage.loginButton.click();
+      signupPage.signupButton.click();
 
-      expect(loginPage.errorMessages.getText()).toEqual('Invalid email/password combination');
+      expect(signupPage.errorMessages.getText()).toEqual('Email already in use');
     });
   });
 });

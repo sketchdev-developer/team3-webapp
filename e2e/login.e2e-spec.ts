@@ -2,7 +2,7 @@ import { SpecHelper } from './support/spec.helper';
 import { LoginPage } from './pages/login.po';
 import { DashboardPage } from './pages/dashboard.po';
 
-xdescribe('logging in', () => {
+describe('logging in', () => {
   let specHelper: SpecHelper;
   let loginPage: LoginPage;
   let dashboardPage: DashboardPage;

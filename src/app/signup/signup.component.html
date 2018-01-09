@@ -1,3 +1,27 @@
 <div class="row justify-content-md-center">
   <h1>Sign Up</h1>
 </div>
+
+<div class="row justify-content-md-center">
+  <form [formGroup]="signupForm" class="col-md-4" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label for="input-email">Email</label>
+      <input formControlName="email" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email">
+    </div>
+
+    <div class="form-group">
+      <label for="input-password">Password</label>
+      <input formControlName="password" type="password" class="form-control" id="input-password" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger error-messages" role="alert" *ngIf="formErrors.length">
+        {{ formErrors }}
+      </div>
+    </div>
+
+    <button type="submit"
+            [disabled]="signupForm.pristine"
+            class="btn btn-success signup-button">Sign Up</button>
+  </form>
+</div>
