@@ -2,6 +2,7 @@ import { $, $$ } from 'protractor';
 
 export class Navbar {
   loginLink = $('.navbar .login-link');
+  signupLink = $('.navbar .signup-link');
 }
 
 export class HomePage {

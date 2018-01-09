@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class SignupComponent implements OnInit {
+  signupForm: FormGroup;
   formErrors: string = '';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private auth: AuthenticationService
+    private users: UserService
   ) {
-    this.loginForm = this.fb.group({
+    this.signupForm = this.fb.group({
       email: ['', Validators.required ],
       password: ['', Validators.required ],
     });
@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const formValue = this.loginForm.value;
+    const formValue = this.signupForm.value;
 
-    this.auth.authenticateUser(formValue.email, formValue.password).subscribe(
+    this.users.registerUser(formValue.email, formValue.password).subscribe(
       result => this.router.navigate(['/dashboard']),
       errorResponse => {
         console.log('error!!!', errorResponse.error.errors);

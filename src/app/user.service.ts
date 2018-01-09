@@ -14,10 +14,10 @@ class SessionData {
 }
 
 @Injectable()
-export class AuthenticationService {
+export class UserService {
   constructor(private http: HttpClient) {}
 
-  authenticateUser(email, password): Observable<SessionData> {
-    return this.http.post<SessionData>('/api/sessions', { email, password });
+  registerUser(email, password): Observable<SessionData> {
+    return this.http.post<SessionData>('/api/users', { email, password });
   }
 }
