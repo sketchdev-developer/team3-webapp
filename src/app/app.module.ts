@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthenticationService } from './authentication.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AuthenticationService } from './authentication.service';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SignupComponent
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
