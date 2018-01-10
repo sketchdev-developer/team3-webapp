@@ -3,6 +3,9 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+machine:
+  ruby:
+    version: 2.5.0
 dependencies:
   pre:
     - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
