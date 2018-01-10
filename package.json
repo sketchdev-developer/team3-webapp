@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e -s false",
     "ci:build": "ng build --env=test --target=production --aot --progress=false",
+    "prod:build": "ng build --prod --aot --progress=false",
     "ci:e2e": "ng e2e -s false --progress=false"
   },
   "private": true,
