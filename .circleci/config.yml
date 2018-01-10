@@ -63,6 +63,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn run prod:build
+      - run: bundle install
       - run:
           name: Deploy if tests pass and branch is Master
           command: bundle exec cap production deploy
