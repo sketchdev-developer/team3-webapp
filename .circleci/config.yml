@@ -49,6 +49,10 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Run setup script
+          command: bash .circleci/deploy-setup.sh
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
