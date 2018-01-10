@@ -13,7 +13,7 @@ dependencies:
       # - rm google-chrome.deb
 
 jobs:
-  build:
+  build-job:
     docker:
       - image: circleci/node:8.9.4-browsers
 
