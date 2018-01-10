@@ -34,4 +34,5 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: yarn run ci:build
       - run: yarn run ci:e2e
