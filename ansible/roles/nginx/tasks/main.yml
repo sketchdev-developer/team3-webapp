@@ -1,0 +1,40 @@
+---
+
+#- name: Set hostname to {{ webapp_hostname }}
+  #hostname: name={{ webapp_hostname }}
+
+- name: NGINX | Starting NGINX
+  service:
+    name: nginx
+    state: started
+
+- name: Copy nginx configuration
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Create nginx sites-available directory
+  file: path=/etc/nginx/sites-available state=directory owner=root group=root
+
+- name: Create nginx sites-enabled directory
+  file: path=/etc/nginx/sites-enabled state=directory owner=root group=root
+
+- name: Copy nginx configuration
+  template: src=webapp.conf dest=/etc/nginx/sites-available/{{ team_name }}_webapp
+  notify: restart nginx
+
+- name: Copy elb status configuration
+  template: src=elb-status.conf dest=/etc/nginx/conf.d/elb-status.conf
+  notify: restart nginx
+
+- name: Remove default nginx conf file
+  file: path=/etc/nginx/conf.d/default.conf state=absent
+  notify: restart nginx
+
+- name: Remove default nginx conf file
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: restart nginx
+
+- name: Enable nginx config
+  file: src={{ item.path }} dest={{ item.dest }} state=link
+  with_items:
+    - { path: '/etc/nginx/sites-available/{{ team_name }}_webapp', dest: '/etc/nginx/sites-enabled/{{ team_name }}_webapp' }
+

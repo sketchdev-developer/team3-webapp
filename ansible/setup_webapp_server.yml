@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+  become_user: root
+  become_method: sudo
+
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    become: yes
+
+- name: Configure Workshop WebApp Server
+  hosts: testing-workshop
+  become_user: root
+  become_method: sudo
+  become: yes
+
+  roles:
+    - packages
+    - setup_deploy_user
+    - nginx
+    - setup_webapp

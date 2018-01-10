@@ -1,0 +1,39 @@
+---
+- name: NGINX | Adding NGINX signing key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+
+- name: NGINX | Adding sources.list deb url for NGINX
+  lineinfile: dest=/etc/apt/sources.list line="deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+
+- name: NGINX Plus | Adding sources.list deb-src url for NGINX
+  lineinfile: dest=/etc/apt/sources.list line="deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+
+- name: Setup yarn deps
+  shell: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+
+- name: Setup yarn deps
+  shell: echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+- name: Updating apt cache
+  apt:
+    update_cache: yes
+
+- name: NGINX | Installing NGINX
+  apt:
+    pkg: nginx
+    state: latest
+
+- name: Upgrade apt-get
+  apt: upgrade=dist
+
+- name: Install git
+  apt: name=git state=latest
+
+- name: Install Node
+  apt: name=nodejs state=present
+
+- name: Install yarn
+  apt: name=yarn state=present
+
+- name: Install build tools
+  apt: name=build-essential state=present

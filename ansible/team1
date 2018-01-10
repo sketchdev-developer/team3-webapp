@@ -1,0 +1,2 @@
+[testing-workshop]
+testing-workshop ansible_ssh_user=ubuntu

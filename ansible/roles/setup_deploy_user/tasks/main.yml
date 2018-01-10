@@ -1,0 +1,29 @@
+---
+- name: Create deploy user
+  user: name=deploy
+
+- name: Add authorized key for deploy user
+  authorized_key: user=deploy key="{{ lookup('file', deploy_user_authorized_key) }}"
+
+- name: Add authorized key for CI server
+  authorized_key: user=deploy key="{{ lookup('file', deploy_user_ci_authorized_key) }}"
+
+- name: Install nvm
+  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+  become: yes
+  become_user: deploy
+
+#- name: Install node 7.2.1
+  #shell: bash -lc "nvm install 7.2.1"
+  #shell: source ~/.profile && nvm install 7.2.1
+  #args:
+    #executable: /bin/bash
+  #become: yes
+  #become_user: deploy
+
+#- name: Use 7.2.1 as default
+  #shell: bash -lc "source ~/.profile && nvm default 7.2.1"
+  ##args:
+    ##executable: /bin/bash
+  #become: yes
+  #become_user: deploy

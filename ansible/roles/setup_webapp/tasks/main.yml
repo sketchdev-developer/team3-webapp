@@ -1,0 +1,3 @@
+---
+- name: Create shared app directory
+  file: path={{ application_directory }}/shared/config state=directory owner=deploy group=deploy
