@@ -1,6 +1,6 @@
-import { SpecHelper } from './support/spec.helper';
-import { LoginPage } from './pages/login.po';
-import { DashboardPage } from './pages/dashboard.po';
+import {SpecHelper} from './support/spec.helper';
+import {LoginPage} from './pages/login.po';
+import {DashboardPage} from './pages/dashboard.po';
 
 describe('logging in', () => {
   let specHelper: SpecHelper;

@@ -1,14 +1,15 @@
-import { $, $$ } from 'protractor';
+import {$, $$} from 'protractor';
 
 export class SignupPage {
-  url = '/signup';
+	url = '/signup';
 
-  header = $('h1');
+	header = $('h1');
 
-  emailInput = $('#input-email');
-  passwordInput = $('#input-password');
+	emailInput = $('#input-email');
+	passwordInput = $('#input-password');
+	selBeverage = $('#select-beverage');
 
-  errorMessages = $('.alert.error-messages');
+	errorMessages = $('.alert.error-messages');
 
-  signupButton = $('.signup-button');
+	signupButton = $('.signup-button');
 }
