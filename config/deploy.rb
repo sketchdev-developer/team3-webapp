@@ -2,12 +2,12 @@
 lock '3.10.1'
 
 set :application, 'workshop_webapp'
-set :repo_url, 'git@github.com:sketchdev-developer/team1-webapp.git'
+set :repo_url, 'git@github.com:sketchdev-developer/team3-webapp.git'
 
 # Default branch is :master
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :deploy_to, '/var/applications/team1/webapp'
+set :deploy_to, '/var/applications/team3/webapp'
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 #append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 #append :linked_dirs, 'node_modules'
