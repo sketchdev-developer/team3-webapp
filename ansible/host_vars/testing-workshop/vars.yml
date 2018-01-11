@@ -4,3 +4,4 @@ team_name: team1
 application_directory: /var/applications/{{ team_name }}/webapp
 webapp_hostname: "{{ team_name }}.sketchdev.io"
 api_hostname: "{{ team_name }}-api.sketchdev.io"
+local_api_hostname: localhost:3000
