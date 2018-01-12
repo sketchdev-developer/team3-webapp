@@ -1,14 +1,43 @@
-<div class="starter-template">
-  <p class="search-text">Search for your favorite comic book character</p>
-	<div class="form-group">
-		<input formControlName="txtSearch" type="text" class="form-control search-input" placeholder="Search">
+<div class="starter-template container">
+	<div class="row">
+		<div class="col text-left">
+			<p class="search-text">Search for your favorite comic book character</p>
+		</div>
 	</div>
-	<button class="btn btn-primary search-button" (click)="searchForBooks()">Search</button>
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<input formControlName="txtSearch" type="text" class="form-control search-input" placeholder="Search">
+			</div>
+		</div>
+		<div class="col-1">
+			<button class="btn btn-primary search-button" (click)="searchForBooks()">Search</button>
+		</div>
+	</div>
 
 	<div class="search-results" *ngIf="searchResults.length">
-		<div class="issue">
-			<div class="title">The Gemstone Project</div>
-			<div class="description">Gemstone Project Description</div>
+		<div class="row">
+			<div class="col">
+				<hr>
+			</div>
+		</div>
+		<div class="issue row">
+			<div class="col-2 text-left">
+				<img class="img-thumbnail" src="https://static.comicvine.com/uploads/square_small/0/3848/5807889-stl002782.jpg">
+			</div>
+			<div class="col">
+				<div class="row">
+					<div class="col text-left">
+						<h4 class="title">The Gemstone Project</h4>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col text-left">
+						<div class="description">Gemstone Project Description</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
