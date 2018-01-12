@@ -5,14 +5,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col">
-			<div class="form-group">
-				<input formControlName="txtSearch" type="text" class="form-control search-input" placeholder="Search">
+			<div class="col">
+				<div class="form-group">
+					<input type="text"
+						   class="form-control search-input"
+						   placeholder="Search"
+						   [(ngModel)]="characterName"
+						   id="charactername"
+						   name="charactername">
+				</div>
 			</div>
-		</div>
-		<div class="col-1">
-			<button class="btn btn-primary search-button" (click)="searchForBooks()">Search</button>
-		</div>
+			<div class="col-1">
+				<button class="btn btn-primary search-button" (click)="searchForBooks()">Search</button>
+			</div>
 	</div>
 
 	<div class="search-results" *ngIf="searchResults.length">

@@ -1,23 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ComicsearchService, IssueSearchResult} from '../comicsearch.service';
+import { NgForm } from '@angular/forms';
 
-
-class IssueSearchResult {
-	// id: string;
-	title: string;
-	description: string;
-	image_url: string;
-	// issue_number: string;
-	// publication_date: string;
-
-	constructor(attrs: any = {}) {
-		// this.id = attrs.id;
-		this.title = attrs.title;
-		this.description = attrs.description;
-		this.image_url = attrs.image_url;
-		// this.issue_number = attrs.issue_number;
-		// this.publication_date = attrs.publication_date;
-	}
-}
 
 @Component({
 	selector: 'app-home',
@@ -27,8 +11,9 @@ class IssueSearchResult {
 export class HomeComponent implements OnInit {
 
 	searchResults: Array<IssueSearchResult>;
+	characterName: string;
 
-	constructor() {
+	constructor(private comicsearch: ComicsearchService) {
 	}
 
 	ngOnInit() {
@@ -36,10 +21,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	searchForBooks() {
-		this.searchResults.push({
-			image_url: 'https://static.comicvine.com/uploads/square_small/0/3848/5807889-stl002782.jpg',
-			title: 'The Gemstone Project',
-			description: 'Gemstone Project Description'
+		this.comicsearch.getComicsByCharacter(this.characterName).subscribe(data => {
+			this.searchResults = data.results;
 		});
 	}
 

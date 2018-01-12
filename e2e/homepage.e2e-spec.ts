@@ -95,6 +95,18 @@ describe('homepage', () => {
       searchResults = [
         result1
       ];
+
+			specHelper.stubApiRequest({
+				url: '/searches',
+				method: 'POST',
+				response: {
+					code: 200,
+					data: {
+						//resultTotal: 500,
+						results: searchResults
+					}
+				}
+			});
     });
 
     it('can search for comic book character', () => {
