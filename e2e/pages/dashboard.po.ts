@@ -1,8 +1,7 @@
-import {$, $$} from 'protractor';
+import { $, $$ } from 'protractor';
 
 export class DashboardPage {
-	url = '/dashboard';
+  url = '/dashboard';
 
-	header = $('h1');
-	welcome = $$('p').first();
+  header = $('h1');
 }
