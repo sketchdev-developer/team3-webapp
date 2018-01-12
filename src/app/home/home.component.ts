@@ -1,15 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+
+class IssueSearchResult {
+	// id: string;
+	title: string;
+	description: string;
+	// image_url: string;
+	// issue_number: string;
+	// publication_date: string;
+
+	constructor(attrs: any = {}) {
+		// this.id = attrs.id;
+		this.title = attrs.title;
+		this.description = attrs.description;
+		// this.image_url = attrs.image_url;
+		// this.issue_number = attrs.issue_number;
+		// this.publication_date = attrs.publication_date;
+	}
+}
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+	searchResults: Array<IssueSearchResult>;
 
-  ngOnInit() {
-  }
+	constructor() {
+	}
+
+	ngOnInit() {
+		this.searchResults = [];
+	}
+
+	searchForBooks() {
+		this.searchResults.push({
+			title: 'The Gemstone Project',
+			description: 'Gemstone project description'
+		});
+	}
 
 }

@@ -1,3 +1,14 @@
 <div class="starter-template">
   <p class="search-text">Search for your favorite comic book character</p>
+	<div class="form-group">
+		<input formControlName="txtSearch" type="text" class="form-control search-input" placeholder="Search">
+	</div>
+	<button class="btn btn-primary search-button" (click)="searchForBooks()">Search</button>
+
+	<div class="search-results" *ngIf="searchResults.length">
+		<div class="issue">
+			<div class="title">The Gemstone Project</div>
+			<div class="description">Gemstone Project Description</div>
+		</div>
+	</div>
 </div>
