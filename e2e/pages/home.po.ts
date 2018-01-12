@@ -1,8 +1,7 @@
 import { $, $$ } from 'protractor';
 
 export class Navbar {
-  loginLink = $('.navbar .login-link');
-  signupLink = $('.navbar .signup-link');
+  appTitle = $('.navbar .navbar-brand');
 }
 
 export class HomePage {
@@ -10,6 +9,5 @@ export class HomePage {
 
   navBar: Navbar = new Navbar();
 
-  introHeader = $('.starter-template h1');
-  introText = $('.starter-template p');
+  searchText = $('.search-text');
 }
