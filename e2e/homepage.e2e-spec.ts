@@ -55,7 +55,7 @@ class IssueSearchResult {
   }
 }
 
-describe('homepage', () => {
+xdescribe('homepage', () => {
   let homePage: HomePage;
   let specHelper: SpecHelper;
 

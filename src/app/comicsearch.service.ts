@@ -35,7 +35,7 @@ export class ComicsearchService {
 	}
 
 	getComicsByCharacter(characterName: string): Observable<SearchResponse> {
-		return this.http.post<SearchResponse>('/api/searches', {search: characterName})
+		return this.http.post<SearchResponse>('/api/searches', {search: characterName});
 			// .map(data => data.results);
 	}
 

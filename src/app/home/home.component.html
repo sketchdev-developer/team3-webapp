@@ -20,7 +20,7 @@
 			</div>
 	</div>
 
-	<div class="search-results" *ngIf="searchResults.length">
+	<div class="search-results" *ngIf="searchResults">
 		<div class="row">
 			<div class="col">
 				<hr>
@@ -28,18 +28,18 @@
 		</div>
 		<div class="issue row" *ngFor="let issue of searchResults">
 			<div class="col-2 text-left">
-				<img class="img-thumbnail" [src]="issue.image_url">
+				<img class="img-thumbnail" [src]="issue.image[0].thumb_url">
 			</div>
 			<div class="col">
 				<div class="row">
 					<div class="col text-left">
-						<h4 class="title">{{issue.title}}</h4>
+						<h4 class="title">{{issue.name[0]}}</h4>
 					</div>
 
 				</div>
 				<div class="row">
 					<div class="col text-left">
-						<div class="description">{{issue.description}}</div>
+						<div class="description" [innerHtml]="issue.description[0]"></div>
 					</div>
 				</div>
 			</div>

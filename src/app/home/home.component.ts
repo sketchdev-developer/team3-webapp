@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
 
 	searchForBooks() {
 		this.comicsearch.getComicsByCharacter(this.characterName).subscribe(data => {
-			this.searchResults = data.results;
+			console.log('????????', data[0].issue);
+			this.searchResults = data[0].issue;
 		});
 	}
-
 }

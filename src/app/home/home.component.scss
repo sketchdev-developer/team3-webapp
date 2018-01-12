@@ -1,4 +1,9 @@
 .starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+	padding: 3rem 1.5rem;
+	text-align: center;
+
+	.issue{
+		border-bottom:1px solid #999999;
+		margin:20px 0;
+	}
 }
